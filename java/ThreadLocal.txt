@@ -1,4 +1,11 @@
-1.ThreadLocal 是什么？
+1.ThreadLocal 是什么?
   ThreadLocal 适用于每个线程需要自己独立的实例且该实例需要在多个方法中被使用，也即变量在线程间隔离而在方法或类间共享的场景
   ThreadLocal 只能操作当前线程对应的示例
-  每个ThreadLocal中都有一个inner class叫作  ThreadLocalMap<this.thread,Object>
+  每个ThreadLocal中都有一个inner class叫作ThreadLocalMap<this.thread,Object>,用于存放ThreadLocal线程各自的变量实例
+2.ThreadLocal 的 get,set等操作方法?
+  所有的操作方法,包括remove等,均是对ThreadLocalMap进行操作,通过this.thread取出ThreadLocalMap中的Entry进行操作
+3.ThreadLocalMap 的什么,作用?
+  ThreadLocalMap 是由内部类 Entry数组 形式构成的,Entry是继承的WeakReference<ThreadLocal<?>>,由key-value结构组成
+4.ThreadLocalMap 的初始化？
+  ThreadLocalMap 是由ThreadLocal调用set()方法的时候进行的初始化,如果ThreadLocal获取当前key为Thread.currentThread()的ThreadLocalMap不存在时,就初始化,类似于懒加载的一种策略
+5.ThreadLocalMap 
